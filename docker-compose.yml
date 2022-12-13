@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  # PHP-Apache
+  php:
+    container_name: php
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    volumes:
+      - "./Contest:/var/www/html"
