@@ -1,35 +1,24 @@
 <?php
 
-$inputs = [];
-while ($input = trim((string) fgets(STDIN))) {
-    $inputs[] = explode(' ', $input);
-}
-$H = $inputs[0][0];
-$W = $inputs[0][1];
-unset($inputs[0]);
-$inputs = array_values($inputs);
+[$H, $W] = explode(' ', trim(fgets(STDIN)));
 
-$S = [];
-$T = [];
+$S = input($H, $W);
+$T = input($H, $W);
 
-foreach ($inputs as $k => $v) {
-    if ($k < $H) {
-        $S[] = $v[0];
-    } else {
-        $T[] = $v[0];
+sort($S);
+sort($T);
+
+echo ($S == $T) ? 'Yes' : 'No';
+echo PHP_EOL;
+
+function input($H, $W)
+{
+    $ST = [];
+    for ($i = 0; $i < $H; $i++) {
+        $s = trim(fgets(STDIN));
+        for ($j = 0; $j < $W; $j++) {
+            $ST[$j] .= $s[$j];
+        }
     }
+    return $ST;
 }
-
-$s = [];
-$t = [];
-for ($i = 0; $i < $H; $i++) {
-    for ($j = 0; $j < $W; $j++) {
-        $s[$j] .= $S[$i][$j];
-        $t[$j] .= $T[$i][$j];
-    }
-}
-
-sort($s);
-sort($t);
-
-echo ($s == $t) ? 'Yes' . PHP_EOL : 'No' . PHP_EOL;
